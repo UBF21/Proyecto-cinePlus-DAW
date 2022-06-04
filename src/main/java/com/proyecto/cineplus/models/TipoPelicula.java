@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//No se utilizo alias para las columnas porque tienen el mismo nombre que en el campo de su tabla
+//No se utilizo alias 
 
 @Entity
 @Table(name="tipo_peli")
