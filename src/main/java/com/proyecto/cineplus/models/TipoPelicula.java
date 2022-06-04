@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//No se utilizo alias para las columnas porque tienen el mismo nombre que en el campo de su tabla
+
 @Entity
 @Table(name="tipo_peli")
 public class TipoPelicula {
