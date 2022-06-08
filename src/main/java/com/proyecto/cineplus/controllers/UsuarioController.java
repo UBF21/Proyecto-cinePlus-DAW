@@ -37,24 +37,26 @@ public class UsuarioController {
 	public String guardarUsuario(@ModelAttribute Usuario usuarios, Model model) {
 		
 		try {
-			if (usuarios != null) {
-				System.out.println(usuarios);
-				repo_usu.save(usuarios);
-			}
 			
+			Usuario u = repo_usu.findById(usuarios.getId()).get();
+					
 			model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
 			model.addAttribute("listaUsuarios",repo_usu.findAll());
 			model.addAttribute("usuarios", new Usuario());
-			model.addAttribute("mensajeCorrecto","Se registro el Usuario");
+			model.addAttribute("mensajeCorrecto","El ID del Usuario Existe");
 			
 		} catch (Exception e) {
+			repo_usu.save(usuarios);
 			model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
 			model.addAttribute("listaUsuarios",repo_usu.findAll());
 			model.addAttribute("usuarios", new Usuario());
-			model.addAttribute("mensajeCorrecto","Error en registrar el Usuario");
+			model.addAttribute("mensajeCorrecto","Se registro correctamente el Usuario");
+			return "redirect:/usuario/listado";
 		}
 		
-		return "MUsuario";
-	}
+		return "redirect:/usuario/listado";
+	}	
+	
+	
 	
 }

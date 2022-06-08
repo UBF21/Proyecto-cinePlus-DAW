@@ -33,7 +33,14 @@ input.valid {
 				<h2>Usuario</h2>
 				<form th:action="@{/usuario/Guardar}" method="post" th:object="${usuarios}">
 
-					<input type="hidden" th:field="*{id}" id="idInput">
+					<div class="form-group mt-2">
+
+						<label for="floatingInputValue">ID :</label> <input
+							type="text" class="form-control" id="floatingInputValue"
+							placeholder="A0000" th:field="*{id}">
+
+					</div>
+					
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Nombre :</label> <input
@@ -76,7 +83,7 @@ input.valid {
 
 						<label for="floatingInputValue">Correo :</label> <input
 							type="email" class="form-control" id="floatingInputValue"
-							placeholder="Dirección..." th:field="*{email}">
+							placeholder="Correo..." th:field="*{email}">
 
 					</div>
 					
@@ -84,7 +91,7 @@ input.valid {
 
 						<label for="floatingInputValue">Contraseña :</label> <input
 							type="password" class="form-control" id="floatingInputValue"
-							placeholder="Correo..." th:field="*{password}">
+							placeholder="Contraseña..." th:field="*{password}">
 
 					</div>
 
