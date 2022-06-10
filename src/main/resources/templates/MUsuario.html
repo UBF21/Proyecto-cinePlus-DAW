@@ -29,15 +29,15 @@ input.valid {
 
 	<div class="container mt-4">
 		<div class="row">
-			<div class="col-3 mt-2">
+			<div class="col-3 mt-2">-
 				<h2>Usuario</h2>
-				<form th:action="@{/usuario/Guardar}" method="post" th:object="${usuarios}">
-
+				<form  th:action="${estado_formulario}" method="post" th:object="${usuarios}">
+				
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">ID :</label> <input
 							type="text" class="form-control" id="floatingInputValue"
-							placeholder="A0000" th:field="*{id}">
+							placeholder="A0000" th:field="*{id}" maxlength="6">
 
 					</div>
 					
@@ -45,7 +45,7 @@ input.valid {
 
 						<label for="floatingInputValue">Nombre :</label> <input
 							type="text" class="form-control" id="floatingInputValue"
-							placeholder="Nombre..." th:field="*{nombre}">
+							placeholder="Nombre..." th:field="*{nombre}" maxlength="40">
 
 					</div>
 
@@ -53,7 +53,7 @@ input.valid {
 
 						<label for="floatingInputValue">Teléfono :</label> <input
 							type="number" class="form-control" id="floatingInputValue"
-							placeholder="Teléfono..." th:field="*{telefono}">
+							placeholder="Teléfono..." th:field="*{telefono}" >
 
 					</div>
 					
@@ -61,7 +61,7 @@ input.valid {
 
 						<label for="floatingInputValue">Dirección :</label> <input
 							type="text" class="form-control" id="floatingInputValue"
-							placeholder="Dirección..." th:field="*{direccion}">
+							placeholder="Dirección..." th:field="*{direccion}" maxlength="100">
 
 					</div>
 					
@@ -83,7 +83,7 @@ input.valid {
 
 						<label for="floatingInputValue">Correo :</label> <input
 							type="email" class="form-control" id="floatingInputValue"
-							placeholder="Correo..." th:field="*{email}">
+							placeholder="Correo..." th:field="*{email}" maxlength="50">
 
 					</div>
 					
@@ -91,18 +91,16 @@ input.valid {
 
 						<label for="floatingInputValue">Contraseña :</label> <input
 							type="password" class="form-control" id="floatingInputValue"
-							placeholder="Contraseña..." th:field="*{password}">
+							placeholder="Contraseña..." th:field="*{password}" maxlength="50">
 
 					</div>
 
-					<div class="form-group mt-2">
+					<div class="form-group mt-2" hidden>
 
 						<label for="floatingInputValue">Estado :</label> <select
 							class="form-select" aria-label="Default select example"
 							th:field="*{estado}">
-							<option selected value="B">[Seleccionar]</option>
-							<option value="A">Activo</option>
-							<option value="I">Inactivo</option>
+							<option selected value="A">Activo</option>
 						</select>
 
 					</div>
@@ -140,8 +138,8 @@ input.valid {
 							<td th:text="${usu.email}"></td>
 							<td th:text="${usu.estado}"></td>
 							<td>
-							<a class="btn btn-info" th:href="@{/usuario/editar/} + ${usu.id}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
-							<a class="btn btn-danger"> <i class="fas fa-trash" title="Eliminar"></i> </a>
+							<a class="btn btn-info" th:href="@{/usuario/Mostrar/} + ${usu.id}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
+							<a class="btn btn-danger" th:href="@{/usuario/Eliminar/} + ${usu.id}" > <i class="fas fa-pen"style="color: white;" title="Eliminar"></i> </a> 
 							</td>
 						</tr>
 
