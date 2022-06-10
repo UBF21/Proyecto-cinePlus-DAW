@@ -18,54 +18,78 @@ import com.proyecto.cineplus.repository.ITipoPelicula;
 @Controller
 @RequestMapping("/pelicula")
 public class PeliculaController {
-	
+
 	@Autowired
 	IPeliculaRepository rep;
-	
+
 	@Autowired
 	ITipoPelicula repot;
 
-	@GetMapping("/list")
-	public String listadoPelicula(Model model) {
-		model.addAttribute("listTypeMovie", repot.findAll());
-		model.addAttribute("listMovie", rep.findAll());
-		model.addAttribute("pelicula", new Pelicula());
+
+	@GetMapping("/listado")
+	public String principal(Model model) {
+
+		model.addAttribute("listadoTipoPelicula", repot.findAll());
+		model.addAttribute("listadoPelicula", rep.findAll());
+		model.addAttribute("movie", new Pelicula());
 		return "MPelicula";
 	}
-	
-	@PostMapping("/save")
-	public String saveMovie(@ModelAttribute(name="pelicula")Pelicula pelicula, Model model) {
-		
+
+	@PostMapping("/guardar")
+	public String guardarPelicula(@ModelAttribute(name = "pelicula") Pelicula pelicula, Model model) {
+
 		try {
 			if (pelicula != null) {
+				System.out.println(pelicula);
 				rep.save(pelicula);
 			}
-			model.addAttribute("listTypeMovie", repot.findAll());
-			model.addAttribute("listMovie", rep.findAll());
-      		model.addAttribute("pelicula", new Pelicula());
-			model.addAttribute("mensaje", "Successfull register");
-			
-		} catch (Exception e) {
-			
-			model.addAttribute("listTypeMovie", repot.findAll());
-			model.addAttribute("listMovie", rep.findAll());
+			model.addAttribute("listadoTipoPelicula", repot.findAll());
+			model.addAttribute("listadoPelicula", rep.findAll());
 			model.addAttribute("pelicula", new Pelicula());
-			model.addAttribute("mensajeError", "Error  register");
-		}
-		
-		
-		return "MPelicula";
-	}
-	
-	@GetMapping("/editar/id")
-	public String editPelicula(@PathVariable String id, Model model) {
-		Optional<Pelicula> pelicula = rep.findById(id);
-		if(pelicula.isPresent()) {
-			model.addAttribute("list", rep.findAll());
-			model.addAttribute("pelicula", pelicula);
+			model.addAttribute("mesage", "Successfully registered movie.");
+
+		} catch (Exception e) {
+
+			model.addAttribute("listadoTipoPelicula", repot.findAll());
+			model.addAttribute("listadoPelicula", rep.findAll());
+			model.addAttribute("pelicula", new Pelicula());
+			model.addAttribute("errorMessager", "Error registering movie.");
+			
 		}
 		return "MPelicula";
+
 	}
+
 	
-	
+	  @GetMapping("/editar{id}") 
+	  public String editPelicula(@PathVariable int id, Model model) {
+	  
+	  Optional<Pelicula> pelicula = rep.findById(id); 
+	  		if(pelicula.isPresent()) {
+		  	model.addAttribute("listadoTipoPelicula", repot.findAll());
+			model.addAttribute("listadoPelicula", rep.findAll());
+			model.addAttribute("movie",pelicula); 
+			return "MPelicula";
+	  
+	  }  
+	  	return "MPelicula";
+	  				
+	  }
+	  
+	  @GetMapping("/eliminar{id}") 
+	  public String eliminarPelicula(@PathVariable int id, Model model) {
+	  
+	  Optional<Pelicula> pelicula = rep.findById(id); 
+	  		if(pelicula.isPresent()) {
+		  	model.addAttribute("listadoTipoPelicula", repot.findAll());
+			model.addAttribute("listadoPelicula", rep.findAll());
+			model.addAttribute("movie",pelicula); 
+			rep.deleteById(id);
+			
+	  
+	  }  
+	  	return "MPelicula";
+	  				
+	  }
+
 }

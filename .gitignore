@@ -1,3 +1,4 @@
+src/main/resources/templates/MCliente.html
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

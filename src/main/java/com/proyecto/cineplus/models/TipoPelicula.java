@@ -5,16 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//No se utilizo alias 
+
 
 @Entity
-@Table(name="tipo_peli")
+@Table(name="tipo_Peli")
 public class TipoPelicula {
 	
 	@Id
 	@Column(name="cod_tipo")
 	private int idtipo;
 	
+	private String desc_tipo;
 	
 	public TipoPelicula() {
 		super();
@@ -24,7 +25,7 @@ public class TipoPelicula {
 		this.idtipo = idtipo;
 		this.desc_tipo = desc_tipo;
 	}
-	private String desc_tipo;
+	
 	public int getIdtipo() {
 		return idtipo;
 	}
