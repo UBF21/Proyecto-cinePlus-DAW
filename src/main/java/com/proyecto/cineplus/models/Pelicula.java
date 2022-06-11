@@ -16,7 +16,7 @@ public class Pelicula {
 	
 	@Id
 	@Column(name="cod_peli")
-	private int idpeli;
+	private String idpeli;
 	
 	private String nombre;
 	
@@ -33,12 +33,14 @@ public class Pelicula {
 	
 	private String estado;
 	
+	
+	
 
 	public Pelicula() {
 		super();
 	}
 
-	public Pelicula(int idpeli, String nombre, TipoPelicula tipopelicula, int tipo_peli, String fecha_estreno,
+	public Pelicula(String idpeli, String nombre, TipoPelicula tipopelicula, int tipo_peli, String fecha_estreno,
 			String fecha_final, String estado) {
 		super();
 		this.idpeli = idpeli;
@@ -50,11 +52,11 @@ public class Pelicula {
 		this.estado = estado;
 	}
 
-	public int getIdpeli() {
+	public String getIdpeli() {
 		return idpeli;
 	}
 
-	public void setIdpeli(int idpeli) {
+	public void setIdpeli(String idpeli) {
 		this.idpeli = idpeli;
 	}
 
@@ -106,9 +108,7 @@ public class Pelicula {
 		this.estado = estado;
 	}
 	
-	
-	
-	
+
 	
 
 }

@@ -35,7 +35,7 @@ create table Cliente(
 
 
 create table tipo_Peli(
-	cod_tipo int not null,
+	cod_tipo int not null AUTO_INCREMENT,
     desc_tipo varchar(40) not null,
     primary key(cod_tipo)
 );
@@ -55,7 +55,7 @@ create table Proveedor(
 );
 
 create table Pelicula(
-	cod_peli int not null AUTO_INCREMENT,
+	cod_peli char(5) not null,
     nombre varchar(100) not null,
     tipo_peli int not null,
     fecha_Estreno date not null,
@@ -123,12 +123,12 @@ insert into Cliente values(null, 'Luis gonsales pilar', '999999999', 'San Borja'
 
 /*Insertando Datos a la Tabla Tipo_Pelicula*/
 
-insert into tipo_Peli values(1, 'Anime');
-insert into tipo_Peli values(2, 'Terror');
-insert into tipo_Peli values(3, 'Dibujos');
-insert into tipo_Peli values(4, 'Romantica');
-insert into tipo_Peli values(5, 'Ciencia Ficción');
-insert into tipo_Peli values(6, 'Animada');
+insert into tipo_Peli values(null, 'Anime');
+insert into tipo_Peli values(null, 'Terror');
+insert into tipo_Peli values(null, 'Dibujos');
+insert into tipo_Peli values(null, 'Romantica');
+insert into tipo_Peli values(null, 'Ciencia Ficción');
+insert into tipo_Peli values(null, 'Animada');
 
 /*Insertando Datos a la Tabla Tipo_Comestible*/
 
@@ -146,18 +146,18 @@ insert into Proveedor values (null, 'EMP.GOMI', 56756765, 'SAN BORJA');
 
 /*Insertando Datos a la Tabla Pelicula*/
 
-insert into Pelicula values (null,'Boku no Hero', 1, '2020-12-12', '2021-01-10', 'A');
-insert into Pelicula values (null,'Your Name', 1, '2020-11-1', '2021-12-1', 'A');
-insert into Pelicula values (null,'kimetsu no yaiba', 1, '2020-12-4', '2021-01-28', 'A');
-insert into Pelicula values (null,'Cadáver', 2, '2020-12-10', '2021-01-10', 'A');
-insert into Pelicula values (null,'Anabelle', 2, '2020-11-1', '2021-12-1', 'A');
-insert into Pelicula values (null,'Eli', 2, '2020-12-4', '2021-01-28', 'A');
-insert into Pelicula values (null,'Toy Story', 3, '2020-12-10', '2021-01-10', 'A');
-insert into Pelicula values (null,'Mascotas', 3, '2020-11-1', '2021-12-1', 'A');
-insert into Pelicula values (null,'Scooby Doo!', 3, '2020-12-4', '2021-01-28', 'A');
-insert into Pelicula values (null, 'Zero', 4, '2020-12-10', '2021-01-10', 'A');
-insert into Pelicula values (null, 'Titanic', 4, '2020-11-1', '2021-12-1', 'A');
-insert into Pelicula values (null, 'Violet y Finch', 4, '2020-12-4', '2021-01-28', 'A');
+insert into Pelicula values ('P0001', 'Boku no Hero', 1, '2020-12-12', '2021-01-10', 'A');
+insert into Pelicula values ('P0002', 'Your Name', 1, '2020-11-1', '2021-12-1', 'A');
+insert into Pelicula values ('P0003', 'kimetsu no yaiba', 1, '2020-12-4', '2021-01-28', 'A');
+insert into Pelicula values ('P0004', 'Cadáver', 2, '2020-12-10', '2021-01-10', 'A');
+insert into Pelicula values ('P0005', 'Anabelle', 2, '2020-11-1', '2021-12-1', 'A');
+insert into Pelicula values ('P0006', 'Eli', 2, '2020-12-4', '2021-01-28', 'A');
+insert into Pelicula values ('P0007', 'Toy Story', 3, '2020-12-10', '2021-01-10', 'A');
+insert into Pelicula values ('P0008', 'Mascotas', 3, '2020-11-1', '2021-12-1', 'A');
+insert into Pelicula values ('P0009', 'Scooby Doo!', 3, '2020-12-4', '2021-01-28', 'A');
+insert into Pelicula values ('P0010', 'Zero', 4, '2020-12-10', '2021-01-10', 'A');
+insert into Pelicula values ('P0011', 'Titanic', 4, '2020-11-1', '2021-12-1', 'A');
+insert into Pelicula values ('P0012', 'Violet y Finch', 4, '2020-12-4', '2021-01-28', 'A');
 
 /*Insertando Datos a la Tabla Comestible*/
 

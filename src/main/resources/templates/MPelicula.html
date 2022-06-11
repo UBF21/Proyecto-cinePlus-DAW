@@ -35,14 +35,21 @@ input.valid {
 
 				<h2>Pelicula</h2>
 
-				<form th:action="@{/pelicula/guardar}" th:object="${movie}" method="post">
+				<form th:action="${estadoForm}" th:object="${peliculas}" method="post">
 
-					<input type="hidden" th:field="*{idpeli}" id="idInput">
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">Titulo :</label> <input
+						<label for="floatingInputValue">ID :</label> <input
+						type="text" class="form-control" id="floatingInputValue"
+							placeholder="P0000" th:field="*{idpeli}" maxlength="6">
+
+					</div>
+					
+						<div class="form-group mt-2">
+
+						<label for="floatingInputValue">Nombre :</label> <input
 							type="text" class="form-control" id="floatingInputValue"
-							placeholder="Nombre de la Pelicula" th:field="*{nombre}">
+							placeholder="Nombre de la pelicula" th:field="*{nombre}">
 
 					</div>
 
@@ -93,7 +100,7 @@ input.valid {
 						<a class="btn btn-secondary" th:href="@{/pelicula/listado}">Refrescar</a>
 					</div>
 				</form>
-				<div th:if="${message} != null" class="alert alert-primary" role="alert" th:text="${message}"></div>
+				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary" role="alert" th:text="${mensajeCorrecto}"></div>
 			</div>
 			
 			<div class="col-9">
@@ -120,7 +127,7 @@ input.valid {
 							<td th:text="${p.fecha_final}"></td>
 							<td th:text="${p.estado}"></td>
 							<td>
-							<a class="btn btn-info" th:href="@{/pelicula/editar} + ${p.idpeli}"> <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
+							<a class="btn btn-info" th:href="@{/pelicula/mostrar} + ${p.idpeli}"> <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
 							<a class="btn btn-danger" th:href="@{/pelicula/eliminar} + ${p.idpeli}"> <i class="fas fa-trash" title="Eliminar"></i> </a>
 							</td>
 						</tr>

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.cineplus.models.Pelicula;
 
 @Repository
-public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer>  {
+public interface IPeliculaRepository extends JpaRepository<Pelicula, String>  {
 
 }
