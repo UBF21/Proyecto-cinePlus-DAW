@@ -62,7 +62,7 @@ public class PeliculaController {
 				model.addAttribute("listadoPelicula", rep.findAll());
 				model.addAttribute("pelicula",peliculas); 
 				return "MPelicula";
-				/* return "redirect:/pelicula/listado"; */
+				
 			}
 			return "redirect:/pelicula/listado";
 			
