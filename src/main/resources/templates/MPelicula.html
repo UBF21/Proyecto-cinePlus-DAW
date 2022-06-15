@@ -35,13 +35,13 @@ input.valid {
 
 				<h2>Pelicula</h2>
 
-				<form th:action="${estadoForm}" th:object="${peliculas}" method="post">
+				<form th:action="@{/pelicula/guardar}" th:object="${pelicula}" method="post">
 
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">ID :</label> <input
 						type="text" class="form-control" id="floatingInputValue"
-							placeholder="P0000" th:field="*{idpeli}" maxlength="6">
+							placeholder="P0000" th:field="*{idpeli}"  autocomplete="off">
 
 					</div>
 					
@@ -49,7 +49,7 @@ input.valid {
 
 						<label for="floatingInputValue">Nombre :</label> <input
 							type="text" class="form-control" id="floatingInputValue"
-							placeholder="Nombre de la pelicula" th:field="*{nombre}">
+							placeholder="Nombre de la pelicula" th:field="*{nombre}" autocomplete="off">
 
 					</div>
 
@@ -72,7 +72,7 @@ input.valid {
 
 						<label for="floatingInputValue">Fecha de Estreno :</label> 
 						<input type= "date" class="form-control" id="floatingInputValue"
-							placeholder="Fecha de estreno" th:field="*{fecha_estreno}">
+							placeholder="Fecha de estreno" th:field="*{fecha_estreno}" autocomplete="off">
 
 					</div>
 
@@ -80,7 +80,7 @@ input.valid {
 
 						<label for="floatingInputValue">Fecha final :</label> 
 						<input type= "date" class="form-control" id="floatingInputValue"
-							placeholder="Fecha final" th:field="*{fecha_final}">
+							placeholder="Fecha final" th:field="*{fecha_final}" autocomplete="off">
 
 					</div>
 
@@ -111,6 +111,7 @@ input.valid {
 						<tr class="bg-success">
 							<th>ID</th>
 							<th>Titulo</th>
+							<th>ID Categoria</th> 
 							<th>Categoria</th> 
 							<th>Fecha de estreno</th>
 							<th>Fecha final</th>
@@ -122,13 +123,15 @@ input.valid {
 						<tr th:each="p : ${listadoPelicula}">
 							<td th:text="${p.idpeli}"></td>		
 							<td th:text="${p.nombre}"></td>
+							<td th:text="${p.tipopelicula.idtipo}"></td>
 							<td th:text="${p.tipopelicula.desc_tipo}"></td>
 							<td th:text="${p.fecha_estreno}"></td>
 							<td th:text="${p.fecha_final}"></td>
 							<td th:text="${p.estado}"></td>
 							<td>
-							<a class="btn btn-info" th:href="@{/pelicula/mostrar} + ${p.idpeli}"> <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
-							<a class="btn btn-danger" th:href="@{/pelicula/eliminar} + ${p.idpeli}"> <i class="fas fa-trash" title="Eliminar"></i> </a>
+							<a class="btn btn-info btn-sm "
+							th:href="@{/pelicula/editar/} + ${p.idpeli}"> <i class="fas fa-pen" style="color: white;" title="Editar"></i></a> 
+							<a class="btn btn-danger btn-sm sm-2" th:href="@{/pelicula/eliminar} + ${p.idpeli}"> <i class="fas fa-trash" title="Eliminar"></i> </a>
 							</td>
 						</tr>
 							
