@@ -68,17 +68,24 @@ public class PeliculaController {
 			
 		}
 	  
-		/*
-		 * @GetMapping("/eliminar{id}") public String eliminarPelicula(@PathVariable int
-		 * id, Model model) {
-		 * 
-		 * Optional<Pelicula> pelicula = rep.findById(id); if(pelicula.isPresent()) {
-		 * model.addAttribute("listadoTipoPelicula", repot.findAll());
-		 * model.addAttribute("listadoPelicula", rep.findAll());
-		 * model.addAttribute("movie",pelicula); rep.deleteById(id);
-		 * 
-		 * 
-		 * } return "MPelicula";
-		 */
-	  				
+		
+		  @GetMapping("/eliminar/{id}")
+		  public String eliminarPelicula(@PathVariable String id, Model model) {
+		  
+		 /* Optional<Pelicula> pelicula = rep.findById(id); */
+		 Pelicula pelicula = rep.findById(id).get(); 
+		  
+		  if(pelicula != null) {
+			  
+		  pelicula.setEstado("I");
+		  rep.save(pelicula);
+		  model.addAttribute("listadoTipoPelicula", repot.findAll());
+		  model.addAttribute("listadoPelicula", rep.findAll());
+		  model.addAttribute("pelicula",pelicula); 
+		  return "MPelicula";
+		  
+		  }
+		  return "redirect:/pelicula/listado";
+		 
+		}	
 	  }
