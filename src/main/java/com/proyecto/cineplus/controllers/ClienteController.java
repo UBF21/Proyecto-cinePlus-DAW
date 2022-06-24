@@ -33,6 +33,9 @@ public class ClienteController {
 		
 		if (cliente != null) {
 			repo.save(cliente);
+			model.addAttribute("listado", repo.findAll());
+			model.addAttribute("cliente", new Cliente());
+			return "MCliente";
 		}
 		return "redirect:/cliente/listado";
 	}
@@ -43,6 +46,7 @@ public class ClienteController {
 		if (cliente.isPresent()) {			
 			model.addAttribute("listado", repo.findAll());
 			model.addAttribute("cliente", cliente);
+			return "MCliente";
 		}
 		return "MCliente";
 	}
