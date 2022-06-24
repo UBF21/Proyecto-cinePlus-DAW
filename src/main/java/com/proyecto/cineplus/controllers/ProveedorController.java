@@ -26,6 +26,7 @@ public class ProveedorController {
 		
 		model.addAttribute("listado", repoProveedor.findAll());
 		model.addAttribute("proveedor", new Proveedor());
+		model.addAttribute("cantidad", repoProveedor.findAll().size());
 		return "MProveedor";
 	}
 	
@@ -34,7 +35,7 @@ public class ProveedorController {
 		
 		if (proveedor != null) {
 			repoProveedor.save(proveedor);
-			
+			model.addAttribute("cantidad", repoProveedor.findAll().size());
 		}
 		return "redirect:/proveedor/listado";
 
@@ -46,6 +47,7 @@ public class ProveedorController {
 		if (proveedor.isPresent()) {
 			System.out.println(proveedor.toString());
 			model.addAttribute("listado", repoProveedor.findAll());
+			model.addAttribute("cantidad", repoProveedor.findAll().size());
 			model.addAttribute("proveedor", proveedor);
 		}
 		return "MProveedor";

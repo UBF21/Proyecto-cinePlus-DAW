@@ -32,6 +32,7 @@ public class ComestibleController {
 	public String listadoComestible(@ModelAttribute(name = "comestible") Comestible comestible,Model model) {
 		model.addAttribute("listado", repoComestible.findAll());
 		model.addAttribute("comestible", new Comestible());
+		model.addAttribute("cantidad", repoComestible.findAll().size());
 		model.addAttribute("cboComestible", repoTipoComestible.findAll());
 		model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
 		return "MComestible";
@@ -44,6 +45,7 @@ public class ComestibleController {
 			repoComestible.save(comestible);
 			model.addAttribute("listado", repoComestible.findAll());
 			model.addAttribute("cboComestible", repoTipoComestible.findAll());
+			model.addAttribute("cantidad", repoComestible.findAll().size());
 			model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
 			return "MComestible";
 		}
@@ -58,6 +60,7 @@ public class ComestibleController {
 			model.addAttribute("listado", repoComestible.findAll());
 			model.addAttribute("cboComestible", repoTipoComestible.findAll());
 			model.addAttribute("comestible", comestible);
+			model.addAttribute("cantidad", repoComestible.findAll().size());
 			model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
 			return "MComestible";
 		}

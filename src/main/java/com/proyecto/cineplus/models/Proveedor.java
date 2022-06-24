@@ -10,7 +10,6 @@ import javax.persistence.Table;
 public class Proveedor {
 
 	@Id
-<<<<<<< HEAD
 	@Column(name = "id")
 	private int id_proveedor;
 	
@@ -21,34 +20,15 @@ public class Proveedor {
 	
 	@Column(name = "direc")
 	private String direccion;
-	
 
 	public Proveedor(int id_proveedor, String nombre, String telefono, String direccion) {
 		super();
 		this.id_proveedor = id_proveedor;
-=======
-	private int id;
-	private String nombre;
-	
-	@Column(name = "telf")
-	private String telefono;
-	@Column(name = "direc")
-	private String direccion;
-	
-	public Proveedor() {
-		super();
-	}
-	
-	public Proveedor(int id, String nombre, String telefono, String direccion) {
-		super();
-		this.id = id;
->>>>>>> modulo1_yelitza
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
 
-<<<<<<< HEAD
 	public Proveedor() {
 		super();
 	}
@@ -59,14 +39,6 @@ public class Proveedor {
 
 	public void setId_proveedor(int id_proveedor) {
 		this.id_proveedor = id_proveedor;
-=======
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
->>>>>>> modulo1_yelitza
 	}
 
 	public String getNombre() {
@@ -92,17 +64,8 @@ public class Proveedor {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-<<<<<<< HEAD
 
-	@Override
-	public String toString() {
-		return "Proveedor [id_proveedor=" + id_proveedor + ", nombre=" + nombre + ", telefono=" + telefono
-				+ ", direccion=" + direccion + "]";
-	}
 
-	
-=======
->>>>>>> modulo1_yelitza
 	
 	
 }

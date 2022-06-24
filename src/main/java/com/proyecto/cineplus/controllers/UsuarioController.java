@@ -29,6 +29,7 @@ public class UsuarioController {
 	
 	public String principal(Model model) {
 		RellenarGuardar(model, new Usuario());
+		
 		return "MUsuario";
 	}
 	
@@ -154,6 +155,7 @@ public class UsuarioController {
 		model.addAttribute("estado_formulario","/usuario/Guardar");		
 		model.addAttribute("listaTipoUsuario", repo_tipousu.findAll());
 		model.addAttribute("listaUsuarios",repo_usu.findAll());
+		model.addAttribute("cantidad", repo_usu.findAll().size());
 		model.addAttribute("usuarios", usario);
 	}
 	

@@ -25,6 +25,7 @@ public class ClienteController {
 	public String listadoCliente(Model model) {
 		model.addAttribute("listado", repo.findAll());
 		model.addAttribute("cliente", new Cliente());
+		model.addAttribute("cantidad", repo.findAll().size());
 		return "MCliente";
 	}
 	
@@ -35,6 +36,7 @@ public class ClienteController {
 			repo.save(cliente);
 			model.addAttribute("listado", repo.findAll());
 			model.addAttribute("cliente", new Cliente());
+			model.addAttribute("cantidad", repo.count());
 			return "MCliente";
 		}
 		return "redirect:/cliente/listado";
@@ -45,6 +47,7 @@ public class ClienteController {
 		Optional<Cliente> cliente = repo.findById(id);
 		if (cliente.isPresent()) {			
 			model.addAttribute("listado", repo.findAll());
+			model.addAttribute("cantidad", repo.count());
 			model.addAttribute("cliente", cliente);
 			return "MCliente";
 		}

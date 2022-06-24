@@ -30,6 +30,7 @@ public class PeliculaController {
 	public String listadoPeliculas(@ModelAttribute(name = "pelicula") Pelicula pelicula, Model model) {
 		model.addAttribute("listadoTipoPelicula", repot.findAll());
 		model.addAttribute("pelicula", new Pelicula());
+		model.addAttribute("cantidad", rep.findAll().size());
 		model.addAttribute("listadoPelicula", rep.findAll());
 		return "MPelicula";
 	}
@@ -44,6 +45,7 @@ public class PeliculaController {
 			
 			model.addAttribute("listadoTipoPelicula", repot.findAll());
 			model.addAttribute("listadoPelicula", rep.findAll());
+			model.addAttribute("cantidad", rep.findAll().size());
 			return "MPelicula";
 			}
 			return "redirect:/pelicula/listado";
@@ -60,6 +62,7 @@ public class PeliculaController {
 			if (peliculas.isPresent()) {
 				model.addAttribute("listadoTipoPelicula", repot.findAll());
 				model.addAttribute("listadoPelicula", rep.findAll());
+				model.addAttribute("cantidad", rep.findAll().size());
 				model.addAttribute("pelicula",peliculas); 
 				return "MPelicula";
 				
@@ -81,6 +84,7 @@ public class PeliculaController {
 		  rep.save(pelicula);
 		  model.addAttribute("listadoTipoPelicula", repot.findAll());
 		  model.addAttribute("listadoPelicula", rep.findAll());
+		  model.addAttribute("cantidad", rep.findAll().size());
 		  model.addAttribute("pelicula",pelicula); 
 		  return "MPelicula";
 		  
