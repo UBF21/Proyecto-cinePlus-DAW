@@ -43,7 +43,7 @@ input.valid {
 				<form th:action="@{/cliente/Guardar}" th:object="${cliente}"
 					method="post">
 
-					<input type="hidden" th:field="*{id}" id="idInput">
+					<input type="hidden" th:field="*{idCliente}" id="idInput">
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Nombre :</label> <input
@@ -117,14 +117,14 @@ input.valid {
 					</thead>
 					<tbody>
 						<tr th:each="cliente : ${listado}">
-							<td th:text="${cliente.id}"></td>
+							<td th:text="${cliente.idCliente}"></td>
 							<td th:text="${cliente.nombre}"></td>
 							<td th:text="${cliente.telefono}"></td>
 							<td th:text="${cliente.direccion}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.estado}"></td>
 							<td>
-							<a class="btn btn-info btn-sm" th:href="@{/cliente/editar/} + ${cliente.id}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
+							<a class="btn btn-info btn-sm" th:href="@{/cliente/editar/} + ${cliente.idCliente}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
 							<a class="btn btn-danger btn-sm"> <i class="fas fa-trash" title="Eliminar"></i> </a>
 							</td>
 						</tr>

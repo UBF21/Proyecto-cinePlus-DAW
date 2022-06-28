@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Cliente {
 	@Id
 	@Column(name = "id_Cliente")
-	private int id;
+	private int idCliente;
 	private String nombre;
 	private String telefono;
 	private String direccion;
@@ -22,9 +22,9 @@ public class Cliente {
 	}
 
 	
-	public Cliente(int id, String nombre, String telefono, String direccion, String email, String estado) {
+	public Cliente(int idCliente, String nombre, String telefono, String direccion, String email, String estado) {
 		super();
-		this.id = id;
+		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -34,13 +34,13 @@ public class Cliente {
 
 
 	
-	public int getId() {
-		return id;
+	public int getIdCliente() {
+		return idCliente;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCliente(int id) {
+		this.idCliente = id;
 	}
 
 
