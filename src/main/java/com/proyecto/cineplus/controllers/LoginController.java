@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.proyecto.cineplus.models.Usuario;
 import com.proyecto.cineplus.repository.IUsuarioRepository;
@@ -34,7 +34,7 @@ public class LoginController {
 		if(obj != null) {
 			return "redirect:/presentacion/home";
 		}else {
-			model.addAttribute("mensaje","No existen las credenciales");
+			model.addAttribute("mensaje","No existen las credenciales.");
 			return "login";
 		}
 
