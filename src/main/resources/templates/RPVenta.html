@@ -53,6 +53,7 @@ input.valid {
 											<option selected value="B">[Seleccionar]</option>
 											<option th:each=" comestible: ${listComestible}" th:value="${comestible.idComestible}" th:text="${comestible.descripcion}"></option>
 										</select>
+									<span class="text-danger" th:text="${validacion}"></span>			
 
 									</div>
 									<!-- <span class="text-danger"></span> -->

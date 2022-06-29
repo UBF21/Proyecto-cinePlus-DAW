@@ -19,9 +19,6 @@ label.error {
 	color: red;
 }
 
-input.valid {
-	border: 1px solid green;
-}
 </style>
 
 </head>
@@ -36,17 +33,17 @@ input.valid {
 
 			<div class="col-3 mt-2">
 
-				<h2>Cliente</h2>
+				<h2>Proveedor</h2>
 
 
 				<form th:action="@{/proveedor/Guardar}" th:object="${proveedor}"
-					method="post">
+					id="formulario" method="post">
 
 					<input type="hidden" th:field="*{id_proveedor}" id="idInput">
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Nombre :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="nombre"
 							placeholder="Nombre..." th:field="*{nombre}">
 
 					</div>
@@ -56,7 +53,7 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Teléfono :</label> <input
-							type="number" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="telefono"
 							placeholder="Teléfono..." th:field="*{telefono}">
 
 					</div>
@@ -65,14 +62,14 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Dirección :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="direccion"
 							placeholder="Dirección..." th:field="*{direccion}">
 
 					</div>
 
 
 					<div class="mt-2">
-						<button type="submit" class="btn btn-primary fw-bold">Enviar</button>
+						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
 						<a th:href="@{/proveedor/listado}" class="btn btn-secondary fw-bold">Refrescar</a>
 					</div>
 				</form>
@@ -99,7 +96,7 @@ input.valid {
 							<td th:text="${proveedor.direccion}"></td>
 							<td>
 							<a class="btn btn-info btn-sm" th:href="@{/proveedor/editar/} + ${proveedor.id_proveedor}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
-							<a class="btn btn-danger btn-sm"> <i class="fas fa-trash" title="Eliminar"></i> </a>
+							<a class="btn btn-danger btn-sm" th:href="@{/proveedor/eliminar/} + ${proveedor.id_proveedor}"> <i class="fas fa-trash" title="Eliminar"></i> </a>
 							</td>
 						</tr>
 
@@ -146,5 +143,49 @@ input.valid {
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+	
+	<script type="text/javascript">
+	$(function() {
+
+		$("#btn").on("click", function() {
+			$("#formulario").validate({
+				rules : {
+					nombre : {
+						required : true,
+						maxlength : 50
+					},
+					telefono : {
+						required : true,
+						digits : true,
+						minlength : 9,
+						maxlength : 9
+					},
+					direccion : {
+						required : true,
+						maxlength : 50
+					}
+				},
+				messages : {
+					
+					direccion : {
+						required : "El Campo es requerido.",
+						maxlength : "El maximo son 50 caracteres."
+					},
+					nombre : {
+						required : "El Campo es requerido.",
+						maxlength : "El maximo son 50 caracteres."
+					},
+					telefono : {
+						required : "El Campo es requerido.",
+						digits : "Solo se admite dígitos",
+						minlength : "El Maximo son 9 dígitos.",
+						minlength : "El Minimo son 9 dígitos."
+					}
+				}
+			});
+		});
+
+	});
+	</script>
 </body>
 </html>

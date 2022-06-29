@@ -43,7 +43,14 @@ public class BoletaController {
 	private int idRecolectado;
 	
 	@GetMapping("/reporte")
-	public String cargarBoleta(@RequestParam(name = "identificador",required = false,defaultValue ="-1") int idCliente,Model model) {
+	public String cargarBoleta(@RequestParam(name = "identificador",required = false,defaultValue ="-2") int idCliente,Model model) {
+		
+		if (idCliente == -1) {
+			model.addAttribute("validacion", "Seleccione un Cliente.");
+			model.addAttribute("listCliente", repoCliente.findAll());
+			return "RPBoleta";
+		}
+		
 		idRecolectado = idCliente;
 		model.addAttribute("listBoleta", repoBoleta.findByIdCliente(idCliente));
 		model.addAttribute("listCliente", repoCliente.findAll());

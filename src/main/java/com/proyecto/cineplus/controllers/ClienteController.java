@@ -71,11 +71,15 @@ public class ClienteController {
 			model.addAttribute("cliente", cliente);
 			return "MCliente";
 		}
-		return "MCliente";
+		return "redirect:/cliente/listado";
 	}
 	
 	@GetMapping("/reporte")
-	public String reporteCargar(@RequestParam(name = "estado",required = false) String estado,Model model) {
+	public String reporteCargar(@RequestParam(name = "estado",required = false,defaultValue = "C") String estado,Model model) {
+		if (estado.equals("B")) {
+			model.addAttribute("validacion", "Seleccione un estado.");
+			return "RPCliente";
+		}
 		estadoRecolectado = estado;
 		model.addAttribute("listCliente", repo.findByEstado(estado));
 		model.addAttribute("cantidad", repo.findAll().size());
@@ -101,5 +105,20 @@ public class ClienteController {
 			e.printStackTrace();
 		}
 
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarCliente(@PathVariable int id, Model model) {
+		Cliente obj = repo.findById(id).get();
+		
+		if (obj != null) {
+			obj.setEstado("I");
+			repo.save(obj);
+			model.addAttribute("listado", repo.findAll());
+			model.addAttribute("cantidad", repo.count());
+			model.addAttribute("cliente", obj);
+			return "MCliente";
+		}
+		return "redirect:/pelicula/listado";
 	}
 }

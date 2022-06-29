@@ -19,9 +19,7 @@ label.error {
 	color: red;
 }
 
-input.valid {
-	border: 1px solid green;
-}
+
 </style>
 
 </head>
@@ -38,12 +36,12 @@ input.valid {
 			<div class="col-3 mt-2">
 
 				<h2>Película</h2>
-				<form th:action="@{/pelicula/guardar}" th:object="${pelicula}" method="post">
+				<form th:action="@{/pelicula/guardar}" id="formulario" th:object="${pelicula}" method="post">
 
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">ID :</label> <input
-						type="text" class="form-control" id="floatingInputValue"
+						type="text" class="form-control"  id="idpeli"
 							placeholder="P0000" th:field="*{idpeli}"  autocomplete="off">
 
 					</div>
@@ -51,7 +49,7 @@ input.valid {
 						<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Nombre :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="nombre"
 							placeholder="Nombre de la pelicula" th:field="*{nombre}" autocomplete="off">
 
 					</div>
@@ -61,20 +59,20 @@ input.valid {
 
 						<label for="floatingInputValue">Tipo de Pelicula :</label> 
 						<select id="inputType" class="form-select" aria-label="Default select example" th:field = "*{tipo_peli}">
-						<option selected value="-1">Seleccionar..</option>
+						<option selected value="-1">[Seleccionar]</option>
 							<option th:each = "p: ${listadoTipoPelicula}"
 									th:value = "${p.idtipo}"
 									th:text = "${p.desc_tipo}">
 							</option>
 						</select>
-
+							<span class="text-danger" th:text="${validacion}"></span>
 					</div>
 
 
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Fecha de Estreno :</label> 
-						<input type= "date" class="form-control" id="floatingInputValue"
+						<input  required="required" type= "date" class="form-control" id="fecha_estreno"
 							placeholder="Fecha de estreno" th:field="*{fecha_estreno}" autocomplete="off">
 
 					</div>
@@ -82,24 +80,22 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Fecha final :</label> 
-						<input type= "date" class="form-control" id="floatingInputValue"
+						<input required="required" type= "date" class="form-control" id="fecha_final"
 							placeholder="Fecha final" th:field="*{fecha_final}" autocomplete="off">
 
 					</div>
 
-					<div class="form-group mt-2">
+					<div class="form-group mt-2" hidden>
 
 						<label for="floatingInputValue">Estado :</label>
 						 <select class="form-select" aria-label="Default select example" th:field="*{estado}">
-							<option selected value="B">Seleccionar..</option>
 							<option value="A">Activo</option>
-							<option value="I">Inactivo</option>
 						</select>
 
 					</div>
 					<br/>
 					<div class="mt-2">
-						<button type="submit" class="btn btn-primary fw-bold">Enviar</button>
+						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
 						<a class="btn btn-secondary fw-bold" th:href="@{/pelicula/listado}">Refrescar</a>
 					</div>
 				</form>
@@ -169,5 +165,65 @@ input.valid {
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+		
+		<script type="text/javascript">
+		
+		$.validator.addMethod('expresion',function(value,element){
+			return this.optional(element) || /^[P]+[0-9]{4}$/.test(value);
+		});
+		
+		$(document).ready(function () {
+		    var intputElements = document.getElementsByTagName("INPUT");
+		    for (var i = 0; i < intputElements.length; i++) {
+		        intputElements[i].oninvalid = function (e) {
+		            e.target.setCustomValidity("");
+		            if (!e.target.validity.valid) {
+		                if (e.target.fechaEstreno.oninvalid) {
+		                    e.target.setCustomValidity("El Campo es requerido.");
+		                }
+		                else if(e.target.fechaFinal.oninvalid) {
+		                    e.target.setCustomValidity("El Campo es requerido.");
+		                }
+		            }
+		        };
+		    }
+		})
+		
+		
+		
+		$(function(){
+			
+			$("#btn").on("click",function(){
+				$("#formulario").validate({
+					rules:{
+						idpeli:{required:true,minlength:5,maxlength:5,expresion:true},
+						nombre: {required:true,maxlength:100},
+						fechaEstreno:{required:true},
+						fechaFinal :{required:true}
+					},
+					messages:{
+						idpeli:{
+							required:"El Campo es requerido.",
+							minlength:"El Minimo son 5 caracteres",
+							maxlength:"El maximo son 5 caracteres.",
+							expresion:"El Formato es con el prefijo 'P' + 4 dígitos (P0000)."
+							},
+						nombre:{
+							required:"El Campo es requerido.",
+							maxlength: "El maximo son 100 caracteres."
+						},
+						fecha_estreno:{
+							required: "El Campo es requerido."
+							},
+						fecha_final :{
+							required:"El Campo es requerido."
+							}	
+					}
+				});
+			});
+			
+		});
+		
+		</script>
 </body>
 </html>

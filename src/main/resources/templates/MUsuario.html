@@ -19,9 +19,6 @@ label.error {
 	color: red;
 }
 
-input.valid {
-	border: 1px solid green;
-}
 </style>
 
 </head>
@@ -31,20 +28,21 @@ input.valid {
 		<div class="row">
 			<div class="col-3 mt-2">
 				<h2>Usuario</h2>
-				<form  th:action="${estado_formulario}" method="post" th:object="${usuarios}">
-				
+				<form th:action="${estado_formulario}" id="formulario" method="post"
+					th:object="${usuarios}">
+
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">ID :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
-							placeholder="A0000" th:field="*{id}" maxlength="6">
+						<label for="floatingInputValue">ID :</label> <input type="text"
+							class="form-control" id="id" placeholder="A0000" th:field="*{id}"
+							maxlength="6">
 
 					</div>
-					
+
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Nombre :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="nombre"
 							placeholder="Nombre..." th:field="*{nombre}" maxlength="40">
 
 					</div>
@@ -52,45 +50,43 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Teléfono :</label> <input
-							type="number" class="form-control" id="floatingInputValue"
-							placeholder="Teléfono..." th:field="*{telefono}" >
+							type="number" class="form-control" id="telefono"
+							placeholder="Teléfono..." th:field="*{telefono}">
 
 					</div>
-					
+
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Dirección :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
-							placeholder="Dirección..." th:field="*{direccion}" maxlength="100">
+							type="text" class="form-control" id="direccion"
+							placeholder="Dirección..." th:field="*{direccion}"
+							maxlength="100">
 
 					</div>
-					
+
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">Tipo Usuario :</label> 
-						<select id="inputCat" class="form-select"
-							aria-label="Default select example"
-							th:field="*{tipo_usuario}">
-							<option selected value="-1">Seleccionar..</option>
+						<label for="floatingInputValue">Tipo Usuario :</label> <select
+							id="inputCat" class="form-select"
+							aria-label="Default select example" th:field="*{tipo_usuario}">
+							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="c : ${listaTipoUsuario}"
-								th:value="${c.cod_tipo}"
-								th:text="${c.desc_tipo}">
-							</option>
+								th:value="${c.cod_tipo}" th:text="${c.desc_tipo}"></option>
 						</select>
 					</div>
-					
+
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Correo :</label> <input
-							type="email" class="form-control" id="floatingInputValue"
+							type="email" class="form-control" id="email"
 							placeholder="Correo..." th:field="*{email}" maxlength="50">
 
 					</div>
-					
+
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Contraseña :</label> <input
-							type="password" class="form-control" id="floatingInputValue"
+							type="password" class="form-control" id="password"
 							placeholder="Contraseña..." th:field="*{password}" maxlength="50">
 
 					</div>
@@ -101,20 +97,25 @@ input.valid {
 							class="form-select" aria-label="Default select example"
 							th:field="*{estado}">
 							<option selected value="A">Activo</option>
+
 						</select>
 
 					</div>
 
 					<div class="mt-2">
-						<button type="submit" class="btn btn-primary fw-bold">Enviar</button>
+						<button type="submit" id="btn" class="btn btn-primary fw-bold">Enviar</button>
 						<a th:href="@{/usuario/listado}" class="btn btn-secondary fw-bold">Refrescar</a>
 					</div>
 				</form>
-				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary" role="alert" th:text="${mensajeCorrecto}"></div>
+				<div th:if="${mensajeCorrecto} != null" class="alert alert-primary"
+					role="alert" th:text="${mensajeCorrecto}"></div>
 			</div>
 
 			<div class="col-9">
-				<h1>Mantenimiento de Usuarios <span class="badge rounded-pill bg-primary" th:text="${cantidad}"></span></h1>
+				<h1>
+					Mantenimiento de Usuarios <span
+						class="badge rounded-pill bg-primary" th:text="${cantidad}"></span>
+				</h1>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -137,10 +138,13 @@ input.valid {
 							<td th:text="${usu.tipousuario.desc_tipo}"></td>
 							<td th:text="${usu.email}"></td>
 							<td th:text="${usu.estado}"></td>
-							<td>
-							<a class="btn btn-info btn-sm" th:href="@{/usuario/Mostrar/} + ${usu.id}" > <i class="fas fa-pen"style="color: white;" title="Editar"></i> </a> 
-							<a class="btn btn-danger btn-sm" th:href="@{/usuario/Eliminar/} + ${usu.id}" > <i class="fas fa-pen"style="color: white;" title="Eliminar"></i> </a> 
-							</td>
+							<td><a class="btn btn-info btn-sm"
+								th:href="@{/usuario/Mostrar/} + ${usu.id}"> <i
+									class="fas fa-pen sm" style="color: white;" title="Editar"></i>
+							</a> <a class="btn btn-danger btn-sm"
+								th:href="@{/usuario/Eliminar/} + ${usu.id}"> <i
+									class="fas fa-trash sm" style="color: white;" title="Eliminar"></i>
+							</a></td>
 						</tr>
 
 					</tbody>
@@ -150,7 +154,7 @@ input.valid {
 		</div>
 	</div>
 
-<footer th:replace="components/footer :: footer"></footer>
+	<footer th:replace="components/footer :: footer"></footer>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
@@ -172,5 +176,84 @@ input.valid {
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+
+
+	<script type="text/javascript">
+	
+	$.validator.addMethod('expresion',function(value,element){
+		return this.optional(element) || /^[A]+[0-9]{5}$/.test(value);
+	});
+	
+		$(function() {
+
+			$("#btn").on("click", function() {
+				$("#formulario").validate({
+					rules : {
+						email : {
+							required : true,
+							email : true,
+							maxlength : 50
+						},
+						password : {
+							required : true,
+							maxlength : 50
+						},
+						direccion : {
+							required : true,
+							maxlength : 100
+						},
+						telefono : {
+							required : true,
+							digits : true,
+							minlength : 9,
+							maxlength : 9
+						},
+						nombre : {
+							required : true,
+							maxlength : 40
+						},
+						id : {
+							required : true,
+							maxlength : 6,
+							minlength : 6,
+							expresion : true
+						}
+					},
+					messages : {
+						email : {
+							required : "El Campo es requerido.",
+							email : "El formato de email es incorrecto",
+							maxlength : "El maximo son 50 caracteres."
+						},
+						password : {
+							required : "El Campo es requerido.",
+							maxlength : "El maximo son 50 caracteres."
+						},
+						direccion : {
+							required : "El Campo es requerido.",
+							maxlength : "El maximo son 100 caracteres."
+						},
+						telefono : {
+							required : "El Campo es requerido.",
+							digits : "Solo se admite dígitos",
+							minlength : "El Maximo son 9 dígitos.",
+							minlength : "El Minimo son 9 dígitos."
+						},
+						nombre : {
+							required : "El Campo es requerido.",
+							maxlength : "El maximo son 40 caracteres."
+						},
+						id : {
+							required : "El Campo es requerido.",
+							maxlength : "El Maximo son 6 caracteres.",
+							minlength : "El Minimo son 6 caracteres.",
+							expresion : "El Formato es con el prefijo 'A' + 5 dígitos (A00000)"
+						}
+					}
+				});
+			});
+
+		});
+	</script>
 </body>
 </html>

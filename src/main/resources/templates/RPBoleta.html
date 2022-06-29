@@ -52,8 +52,8 @@ input.valid {
 										<option th:each="cliente : ${listCliente}"
 											th:value="${cliente.idCliente}" th:text="${cliente.nombre}"></option>
 									</select>
-
 								</div>
+									<span class="text-danger" th:text="${validacion}"></span>			
 							</div>
 
 							<div class="col-12 mt-2">

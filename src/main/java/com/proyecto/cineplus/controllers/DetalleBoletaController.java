@@ -43,7 +43,13 @@ public class DetalleBoletaController {
 	private String comestibleRecolectado;
 	
 	@GetMapping("/reporte")
-	public String cargarDetalleBoleta(@RequestParam(name = "idComestible",required = false) String id,Model model) {
+	public String cargarDetalleBoleta(@RequestParam(name = "idComestible",required = false,defaultValue = "C") String id,Model model) {
+		if (id.equals("B")) {
+			model.addAttribute("validacion", "Seleccione un Comestible.");
+			model.addAttribute("listComestible", repoComestible.findAll());
+			return "RPVenta";
+
+		}
 		comestibleRecolectado = id;
 		model.addAttribute("listComestible", repoComestible.findAll());
 		model.addAttribute("listDetalleBoleta", repoDetalleBoleta.findByCodComestible(id));

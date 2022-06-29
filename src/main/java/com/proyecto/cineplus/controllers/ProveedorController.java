@@ -53,4 +53,16 @@ public class ProveedorController {
 		return "MProveedor";
 	}
 	
+	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarProveedor(@PathVariable int id,Model model) {
+		
+		Proveedor obj = repoProveedor.findById(id).get();
+		if (obj != null) {
+			
+			repoProveedor.delete(obj);
+			return "redirect:/proveedor/listado";
+		}
+		return "MProveedor";
+	}
 }

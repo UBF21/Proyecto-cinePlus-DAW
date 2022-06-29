@@ -141,7 +141,7 @@ public class UsuarioController {
 		}else if(usuario.getTelefono()==null || usuario.getTelefono().isEmpty() || usuario.getTelefono().length() > 9 || usuario.getTelefono().length() < 9 ) {
 			return "Error en la Telefono";
 		}else if(usuario.getTipo_usuario() == -1) {
-			return "Error en la Selecionar Tipo de Usuario";
+			return "Selecionar Tipo de Usuario.";
 		}else if(usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
 			return "Error en el Email";
 		}else if(usuario.getPassword() == null || usuario.getPassword().isEmpty()) {

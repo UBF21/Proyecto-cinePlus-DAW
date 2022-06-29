@@ -42,6 +42,25 @@ public class ComestibleController {
 	public String guardarComestible(@ModelAttribute(name = "comestible") Comestible comestible,Model model) {
 		
 		if (comestible != null) {
+		
+			if (comestible.getIdTipo() == -1) {
+				model.addAttribute("validacion", "Seleccione un tipo comestible.");
+				model.addAttribute("cboComestible", repoTipoComestible.findAll());
+				model.addAttribute("listado", repoComestible.findAll());
+				model.addAttribute("cantidad", repoComestible.findAll().size());
+				model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
+				return "MComestible";
+			}
+			
+			if (comestible.getIdProveedor() == -1) {
+				model.addAttribute("validacion2", "Seleccione un tipo Proveedor.");
+				model.addAttribute("cboComestible", repoTipoComestible.findAll());
+				model.addAttribute("listado", repoComestible.findAll());
+				model.addAttribute("cantidad", repoComestible.findAll().size());
+				model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
+				return "MComestible";
+			}
+			
 			repoComestible.save(comestible);
 			model.addAttribute("listado", repoComestible.findAll());
 			model.addAttribute("cboComestible", repoTipoComestible.findAll());
@@ -60,6 +79,22 @@ public class ComestibleController {
 			model.addAttribute("listado", repoComestible.findAll());
 			model.addAttribute("cboComestible", repoTipoComestible.findAll());
 			model.addAttribute("comestible", comestible);
+			model.addAttribute("cantidad", repoComestible.findAll().size());
+			model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
+			return "MComestible";
+		}
+		return "redirect:/comestible/listado";
+	}
+	
+	@GetMapping("/eliminar/{id}")
+	public String eliminarComestible(@PathVariable String id,Model model) {
+		Comestible obj = repoComestible.findById(id).get();
+		if (obj != null) {
+			obj.setEstado("I");
+			repoComestible.save(obj);
+			model.addAttribute("listado", repoComestible.findAll());
+			model.addAttribute("cboComestible", repoTipoComestible.findAll());
+			model.addAttribute("comestible", obj);
 			model.addAttribute("cantidad", repoComestible.findAll().size());
 			model.addAttribute("cboProveedor", repoIProveedorRepository.findAll());
 			return "MComestible";

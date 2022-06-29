@@ -55,7 +55,7 @@ input.valid {
 											<option value="A">Activo</option>
 											<option value="I">Inactivo</option>
 										</select>
-
+										<span class="text-danger" th:text="${validacion}"></span>
 									</div>
 									<!-- <span class="text-danger"></span> -->
 								</div>
@@ -107,7 +107,7 @@ input.valid {
 		<div class="row">
 			<div class="col-3" style="margin-left: 950px">
 
-				<a th:href="@{/cliente/filtro}" 
+				<a th:href="@{/cliente/filtro}" target="_blank"
 					class="btn btn-outline-secondary btn-lg" style="font-weight: bold;">Exportar
 					PDF</a>
 			</div>

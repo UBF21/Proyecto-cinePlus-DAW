@@ -19,9 +19,7 @@ label.error {
 	color: red;
 }
 
-input.valid {
-	border: 1px solid green;
-}
+
 </style>
 </head>
 <body>
@@ -39,19 +37,20 @@ input.valid {
 
 
 				<form th:action="@{/comestible/Guardar}" th:object="${comestible}"
-					method="post">
+				 id="formulario" method="post">
 
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">ID :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
-							placeholder="C00000..." th:field="*{idComestible}">
+						<label for="codigo">ID :</label> 
+						<input type="text"  class="form-control"  id="idComestible"
+							placeholder="C00000..." th:field="*{idComestible}" >
 
 					</div>
+					
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Descripción :</label> <input
-							type="text" class="form-control" id="floatingInputValue"
+							type="text" class="form-control" id="descripcion"
 							placeholder="Descripción..." th:field="*{descripcion}">
 
 					</div>
@@ -61,8 +60,8 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Precio :</label> <input
-							type="number" class="form-control" id="floatingInputValue"
-							placeholder="0.0" th:field="*{precio}">
+							type="number" class="form-control" id="precio"
+							 th:field="*{precio}">
 
 					</div>
 
@@ -70,8 +69,8 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Stock :</label> <input
-							type="number" class="form-control" id="floatingInputValue"
-							placeholder="0" th:field="*{stock}">
+							type="text" class="form-control" id="stock"
+							 th:field="*{stock}">
 
 					</div>
 
@@ -79,41 +78,40 @@ input.valid {
 					<div class="form-group mt-2">
 
 						<label for="floatingInputValue">Tipo Comestible :</label> <select
-							class="form-select" aria-label="Default select example"
+							class="form-select" id="comestible" aria-label="Default select example"
 							th:field="*{idTipo}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="comestible : ${cboComestible}" 
 							th:text="${comestible.descripcion}" th:value="${comestible.id}"></option>
 						</select>
-
+						<span class="text-danger" th:text="${validacion}"></span>
+						
 					</div>
 
 					<div class="form-group mt-2">
 
-						<label for="floatingInputValue">Proveedor :</label> <select
-							class="form-select" aria-label="Default select example"
+						<label for="floatingInputValue" >Proveedor :</label> <select
+							class="form-select" id="proveedor" aria-label="Default select example"
 							th:field="*{idProveedor}">
 							<option selected value="-1">[Seleccionar]</option>
 							<option th:each="proveedor : ${cboProveedor}"
 							th:text="${proveedor.nombre}" th:value="${proveedor.id_proveedor}"></option>
 						</select>
-
+						<span class="text-danger" th:text="${validacion2}"></span>
 					</div>
 
-					<div class="form-group mt-2">
+					<div class="form-group mt-2" hidden>
 
 						<label for="floatingInputValue">Estado :</label> <select
 							class="form-select" aria-label="Default select example"
 							th:field="*{estado}">
-							<option selected value="B">[Seleccionar]</option>
 							<option value="A">Activo</option>
-							<option value="I">Inactivo</option>
 						</select>
 
 					</div>
 
 					<div class="mt-2">
-						<button type="submit" class="btn btn-primaryfw-bold">Enviar</button>
+						<button type="submit" id="btn" class="btn btn-primary" style="font-weight: bold">Enviar</button>
 						<a th:href="@{/comestible/listado}" class="btn btn-secondary fw-bold">Refrescar</a>
 					</div>
 				</form>
@@ -148,7 +146,7 @@ input.valid {
 							<td><a class="btn btn-info btn-sm"
 								th:href="@{/comestible/editar/} + ${comestible.idComestible}"> <i
 									class="fas fa-pen" style="color: white;" title="Editar"></i>
-							</a> <a class="btn btn-danger btn-sm"> <i class="fas fa-trash"
+							</a> <a class="btn btn-danger btn-sm" th:href="@{/comestible/eliminar/} + ${comestible.idComestible}"> <i class="fas fa-trash"
 									title="Eliminar"></i>
 							</a></td>
 						</tr>
@@ -199,7 +197,73 @@ input.valid {
 
 
 
+	<script type="text/javascript">
+	
+	$.validator.addMethod('expresion',function(value,element){
+		return this.optional(element) || /^[C]+[0-9]{4}$/.test(value);
+	});
+	
+	$(function() {
 
+		$("#btn").on("click", function() {
+			$("#formulario").validate({
+				rules : {
+					proveedor : {
+						required : true
+						
+					},
+					comestible : {
+						required : true
+					},
+					stock : {
+						required : true,
+						digits : true
+					},
+					precio:{
+						required : true
+					},
+					descripcion : {
+						required : true,
+						maxlength : 50
+					},
+					idComestible : {
+						required : true,
+						maxlength : 5,
+						minlength : 5,
+						expresion : true
+					}
+				},
+				messages : {
+					
+					descripcion : {
+						required : "El Campo es requerido.",
+						maxlength : "El maximo son 50 caracteres."
+					},
+					stock : {
+						required : "El Campo es requerido.",
+						digits : "Solo se admite dígitos"
+					},
+					proveedor :{
+						required : "El Campo es requerido."
+					},
+					comestible:{
+						required : "El Campo es requerido."
+					},
+					precio:{
+						required : "El Campo es requerido."
+					},
+					idComestible : {
+						required : "El Campo es requerido.",
+						maxlength : "Son Maximo 5 caracteres.",
+						minlength : "Son Minimo 5 caracteres.",
+						expresion : "El Formato es con el prefijo 'C' + 4 dígitos (C0000)."
+					}
+				}
+			});
+		});
+
+	});
+	</script>
 
 
 

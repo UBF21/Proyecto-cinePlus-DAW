@@ -41,14 +41,21 @@ public class PeliculaController {
 			if (peliculas != null) {
 				System.out.println(peliculas);
 				
+				if (peliculas.getTipo_peli() == -1) {
+					model.addAttribute("validacion", "Seleccione un tipo de pelicula.");
+					model.addAttribute("listadoTipoPelicula", repot.findAll());
+					model.addAttribute("listadoPelicula", rep.findAll());
+					model.addAttribute("cantidad", rep.findAll().size());
+					return "MPelicula";
+				}
+				
 			rep.save(peliculas);
-			
 			model.addAttribute("listadoTipoPelicula", repot.findAll());
 			model.addAttribute("listadoPelicula", rep.findAll());
 			model.addAttribute("cantidad", rep.findAll().size());
-			return "MPelicula";
-			}
 			return "redirect:/pelicula/listado";
+			}
+			return "MPelicula";
 
 	}
 

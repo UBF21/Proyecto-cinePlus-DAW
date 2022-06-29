@@ -19,9 +19,7 @@ label.error {
 	color: red;
 }
 
-input.valid {
-	border: 1px solid green;
-}
+
 </style>
 
 </head>
@@ -32,7 +30,7 @@ input.valid {
         <div class="row align-items-center vh-100 ">
             <div class="col-lg-5 mx-auto ">
                 <div class="p-5 rounded shadow fondo-claro ">
-                    <form  th:action="@{/login/ingresar}" th:object="${usuario}" method="post">
+                    <form  th:action="@{/login/ingresar}" id="formulario" th:object="${usuario}" method="post">
                         <div class="container">
 
                             <h2 class="text-center mb-3">Login</h2>
@@ -42,7 +40,7 @@ input.valid {
                                 <div class="d-flex justify-content-lg-center">
 
                                     <div class="col-lg-10">
-                                        <input class="form-control"
+                                        <input class="form-control" id="email"
                                                placeholder="Email...." th:fiield="*{email}" name="email">
                                     </div>
                                 </div>
@@ -53,7 +51,7 @@ input.valid {
                                 <div class="d-flex justify-content-lg-center">
                                     <div class="col-lg-10">
 
-                                        <input type="password" class="form-control"
+                                        <input type="password" class="form-control" id="password"
                                                placeholder="Password..." th:fiield="*{password}" name="password">
                                     </div>
                                 </div>
@@ -63,7 +61,7 @@ input.valid {
 
                                 <div class="col-lg-5 mr-2">
                                 <span th:if="${mensaje} != null" class="text-danger" th:text="${mensaje}"></span>
-                                    <input type="submit"  class="btn btn-primary btn-lg" style="font-weight:bold" value="Login">
+                                    <input type="submit"  id="btn" class="btn btn-primary btn-lg" style="font-weight:bold" value="Login">
                                 </div>
                             </div>
 
@@ -101,5 +99,33 @@ input.valid {
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/additional-methods.min.js"></script>
+
+
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#btn").on("click",function(){
+			$("#formulario").validate({
+				rules:{
+					email:{required:true,email:true,maxlength:50},
+					password: {required:true,maxlength:50}
+				},
+				messages:{
+					email:{
+						required:"El Campo es requerido.",
+						email:"El formato de email es incorrecto",
+						maxlength:"El maximo son 50 caracteres."
+						},
+					password:{
+						required:"El Campo es requerido.",
+						maxlength: "El maximo son 50 caracteres."
+					}
+				}
+			});
+		});
+		
+	});
+		
+	</script>
 </body>
 </html>
